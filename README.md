@@ -1,3 +1,3 @@
-# template
+# Status Characteristics Theory - Online Tasks
 
-This is a template for a research project repository!
+This is the repository for the paper "Can you really study an army on the internet? Comparing how status tasks perform in the laboratory and online settings" published in Sociological Methodology. In it, you will find the .qsf file, which you can upload to qualtrics and collect data exactly as we have. You can also access our data management and analysis files (including supplementary analyses).
