@@ -6,3 +6,6 @@ This is the repository for the paper "Can you really study an army on the intern
 _Note, use **cntrl+click** or **cmd+click** to open links in a new window._
 
 The qualtrics file is [this .qsf file](https://drive.google.com/file/d/1y9ns3dLAcOa_vtqM4kyQFb1K2jG16tTO/view?usp=sharing). You can download it to your computer and then follow [these instructions](https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys) to upload it to Qualtrics. 
+
+
+## Replication files
