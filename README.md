@@ -1,5 +1,5 @@
 
-[work.zip](https://github.com/biancamanago/SCTOnlineTasks/files/6511911/work.zip)
+
 # Status Characteristics Theory - Online Tasks
 
 This is the repository for the paper "Can you really study an army on the internet? Comparing how status tasks perform in the laboratory and online settings" published in Sociological Methodology. Here, you will find the .qsf file, which you can upload to qualtrics and collect data exactly as we have. You can also access our data management and analysis files (including supplementary analyses).
@@ -11,3 +11,4 @@ The qualtrics file is [this .qsf file](https://drive.google.com/file/d/1y9ns3dLA
 
 
 ## Replication files
+[work.zip](https://github.com/biancamanago/SCTOnlineTasks/files/6511911/work.zip)
