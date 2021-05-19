@@ -1,0 +1,612 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/biancamanago/Dropbox/_AcademicWork/Active/Research/CST_Lab+R
+> esearch/CST_Comparing Status Tasks/- Posted/SM-04 Replication Files/cst2-do01-
+> reliability-shared.log
+  log type:  text
+ opened on:  19 May 2021, 17:44:08
+
+. 
+. 
+. **************************************************************** 
+. //  #0
+. //  setup
+. ****************************************************************
+.  
+. // CST2 - Comparing Status Tasks Experiment (Online Prolific Sample) 
+. // Examine scale reliabilities and content-coded reliabilities
+. 
+.  version 14.1
+
+.  set linesize 80
+
+.  clear all
+
+.  macro drop _all
+
+. 
+.  
+.  local pgm   cst2-do01-reliability-shared.do
+
+.  local dte   2020-05-29
+
+.  local who   "bianca manago - trenton mize" 
+
+.  local tag   "`pgm'.do `who' `dte'"
+
+.  
+.  di "`tag'"
+cst2-do01-reliability-shared.do.do bianca manago - trenton mize 2020-05-29
+
+.  
+. ****************************************************************
+. // #1
+. // Load Data
+. **************************************************************** 
+.  
+. use "- data/cst2-data04-shared_wide", clear     
+
+. 
+. *********************************************************************
+. // #2 - Calculate reliability stats that require data in wide form
+. *********************************************************************
+. local codes "s_focus_S s_focus_C s_task_S s_task_C" 
+
+. local codes "`codes' s_partner_S s_partner_C"
+
+. 
+. matrix define reli = J(8,12,.)
+
+. 
+. *These analyses treat data as nominal
+. local row = 1
+
+. foreach c in `codes' {
+  2.         kappaetc        `c'*
+  3.         matrix          coefs = r(b)
+  4.         mat             reli[`row',2] = coefs[1,1]
+  5.         mat             reli[`row',4] = coefs[1,3]      
+  6.         mat             reli[`row',5] = coefs[1,6]
+  7.         mat             reli[`row',9] = coefs[1,2]
+  8.         mat             reli[`row',10] = coefs[1,4]     
+  9.         mat             reli[`row',11] = coefs[1,5]     
+ 10.         local           ++row
+ 11.         }
+
+Interrater agreement                             Number of subjects =     272
+                                           Ratings per subject: min =       2
+                                                                avg =  2.0699
+                                                                max =       3
+                                        Number of rating categories =       2
+------------------------------------------------------------------------------
+                     |   Coef.  Std. Err.    t    P>|t|   [95% Conf. Interval]
+---------------------+--------------------------------------------------------
+   Percent Agreement |  0.9301    0.0136  68.30   0.000     0.9033     0.9570
+Brennan and Prediger |  0.8603    0.0272  31.58   0.000     0.8067     0.9139
+Cohen/Conger's Kappa |  0.8483    0.0340  24.95   0.000     0.7814     0.9153
+ Scott/Fleiss' Kappa |  0.5983    0.0692   8.65   0.000     0.4620     0.7345
+           Gwet's AC |  0.9154    0.0180  50.98   0.000     0.8801     0.9508
+Krippendorff's Alpha |  0.5477    0.0659   8.31   0.000     0.4179     0.6774
+------------------------------------------------------------------------------
+
+Interrater agreement                             Number of subjects =     272
+                                           Ratings per subject: min =       3
+                                                                avg =  3.0699
+                                                                max =       4
+                                        Number of rating categories =       2
+------------------------------------------------------------------------------
+                     |   Coef.  Std. Err.    t    P>|t|   [95% Conf. Interval]
+---------------------+--------------------------------------------------------
+   Percent Agreement |  0.9651    0.0077 124.65   0.000     0.9498     0.9803
+Brennan and Prediger |  0.9301    0.0155  60.07   0.000     0.8997     0.9606
+Cohen/Conger's Kappa |  0.8423    0.0472  17.85   0.000     0.7494     0.9352
+ Scott/Fleiss' Kappa |  0.6595    0.0733   9.00   0.000     0.5152     0.8038
+           Gwet's AC |  0.9611    0.0091 105.42   0.000     0.9431     0.9790
+Krippendorff's Alpha |  0.6108    0.0739   8.26   0.000     0.4653     0.7564
+------------------------------------------------------------------------------
+
+Interrater agreement                             Number of subjects =     272
+                                           Ratings per subject: min =       1
+                                                                avg =  2.0184
+                                                                max =       3
+                                        Number of rating categories =       2
+------------------------------------------------------------------------------
+                     |   Coef.  Std. Err.    t    P>|t|   [95% Conf. Interval]
+---------------------+--------------------------------------------------------
+   Percent Agreement |  0.9680    0.0107  90.16   0.000     0.9469     0.9892
+Brennan and Prediger |  0.9360    0.0205  45.57   0.000     0.8956     0.9765
+Cohen/Conger's Kappa |  0.8277    0.0925   8.95   0.000     0.6456     1.0000
+ Scott/Fleiss' Kappa |  0.7498    0.0780   9.62   0.000     0.5964     0.9033
+           Gwet's AC |  0.9633    0.0125  77.06   0.000     0.9387     0.9879
+Krippendorff's Alpha |  0.7244    0.0813   8.91   0.000     0.5643     0.8846
+------------------------------------------------------------------------------
+Confidence interval is clipped at the upper limit.
+
+Interrater agreement                             Number of subjects =     272
+                                           Ratings per subject: min =       2
+                                                                avg =  3.0184
+                                                                max =       4
+                                        Number of rating categories =       2
+------------------------------------------------------------------------------
+                     |   Coef.  Std. Err.    t    P>|t|   [95% Conf. Interval]
+---------------------+--------------------------------------------------------
+   Percent Agreement |  0.9890    0.0045 221.69   0.000     0.9802     0.9978
+Brennan and Prediger |  0.9779    0.0089 109.61   0.000     0.9604     0.9955
+Cohen/Conger's Kappa |  0.9684    0.0150  64.42   0.000     0.9388     0.9980
+ Scott/Fleiss' Kappa |  0.7216    0.0871   8.28   0.000     0.5501     0.8932
+           Gwet's AC |  0.9885    0.0048 207.47   0.000     0.9791     0.9979
+Krippendorff's Alpha |  0.6929    0.0828   8.37   0.000     0.5299     0.8559
+------------------------------------------------------------------------------
+
+Interrater agreement                             Number of subjects =     272
+                                           Ratings per subject: min =       2
+                                                                avg =  2.0294
+                                                                max =       3
+                                        Number of rating categories =       2
+------------------------------------------------------------------------------
+                     |   Coef.  Std. Err.    t    P>|t|   [95% Conf. Interval]
+---------------------+--------------------------------------------------------
+   Percent Agreement |  0.9547    0.0116  81.98   0.000     0.9317     0.9776
+Brennan and Prediger |  0.9093    0.0233  39.04   0.000     0.8635     0.9552
+Cohen/Conger's Kappa |  0.8535    0.0492  17.34   0.000     0.7566     0.9504
+ Scott/Fleiss' Kappa |  0.8291    0.0439  18.88   0.000     0.7427     0.9156
+           Gwet's AC |  0.9383    0.0165  56.77   0.000     0.9057     0.9708
+Krippendorff's Alpha |  0.7994    0.0490  16.31   0.000     0.7030     0.8959
+------------------------------------------------------------------------------
+
+Interrater agreement                             Number of subjects =     272
+                                           Ratings per subject: min =       3
+                                                                avg =  3.0294
+                                                                max =       4
+                                        Number of rating categories =       2
+------------------------------------------------------------------------------
+                     |   Coef.  Std. Err.    t    P>|t|   [95% Conf. Interval]
+---------------------+--------------------------------------------------------
+   Percent Agreement |  0.9853    0.0051 192.00   0.000     0.9752     0.9954
+Brennan and Prediger |  0.9706    0.0103  94.57   0.000     0.9504     0.9908
+Cohen/Conger's Kappa |  0.9635    0.0140  68.83   0.000     0.9359     0.9911
+ Scott/Fleiss' Kappa |  0.8105    0.0564  14.38   0.000     0.6995     0.9215
+           Gwet's AC |  0.9841    0.0058 170.63   0.000     0.9727     0.9954
+Krippendorff's Alpha |  0.7796    0.0580  13.45   0.000     0.6655     0.8937
+------------------------------------------------------------------------------
+
+. *These analyses treat data as nominal   
+. local row = 1
+
+. foreach c in `codes' {
+  2.         corr `c'_1 `c'_2
+  3.         local   prho = `r(rho)'
+  4.         mat     reli[`row',8] = `prho'
+  5.         
+.         capture noisily tetrachoric `c'_1 `c'_2
+  6.         if _rc == 198 {
+  7.                 local   rho = 0
+  8.                 mat     reli[`row',3] = `rho'
+  9.                 }
+ 10.         else {
+ 11.                 local   rho = `r(rho)'
+ 12.                 mat     reli[`row',3] = `rho'
+ 13.                 }       
+ 14.         local   ++row
+ 15.         }
+(obs=272)
+
+             | s_fo~S_1 s_fo~S_2
+-------------+------------------
+ s_focus_S_1 |   1.0000
+ s_focus_S_2 |   0.4736   1.0000
+
+
+   Number of obs =          272
+ Tetrachoric rho =       0.7712
+       Std error =       0.0812
+
+Test of Ho: s_focus_S_1 and s_focus_S_2 are independent
+ 2-sided exact P =       0.0000
+(obs=272)
+
+             | s_fo~C_1 s_fo~C_2
+-------------+------------------
+ s_focus_C_1 |   1.0000
+ s_focus_C_2 |   0.3931   1.0000
+
+
+   Number of obs =          272
+ Tetrachoric rho =       0.7243
+       Std error =       0.1096
+
+Test of Ho: s_focus_C_1 and s_focus_C_2 are independent
+ 2-sided exact P =       0.0000
+(obs=271)
+
+             | s_ta~S_1 s_ta~S_2
+-------------+------------------
+  s_task_S_1 |   1.0000
+  s_task_S_2 |   0.7170   1.0000
+
+
+   Number of obs =          271
+ Tetrachoric rho =       0.9401
+       Std error =       0.0357
+
+Test of Ho: s_task_S_1 and s_task_S_2 are independent
+ 2-sided exact P =       0.0000
+(obs=271)
+
+             | s_ta~C_1 s_ta~C_2
+-------------+------------------
+  s_task_C_1 |   1.0000
+  s_task_C_2 |   0.4944   1.0000
+
+
+   Number of obs =          271
+ Tetrachoric rho =       1.0000
+       Std error =            .
+
+Test of Ho: s_task_C_1 and s_task_C_2 are independent
+ 2-sided exact P =       0.0008
+(obs=272)
+
+             | s_pa~S_1 s_pa~S_2
+-------------+------------------
+s_partne~S_1 |   1.0000
+s_partne~S_2 |   0.7955   1.0000
+
+
+   Number of obs =          272
+ Tetrachoric rho =       0.9606
+       Std error =       0.0195
+
+Test of Ho: s_partner_S_1 and s_partner_S_2 are independent
+ 2-sided exact P =       0.0000
+(obs=272)
+
+             | s_pa~C_1 s_pa~C_2
+-------------+------------------
+s_partne~C_1 |   1.0000
+s_partne~C_2 |   0.5847   1.0000
+
+
+   Number of obs =          272
+ Tetrachoric rho =       0.8906
+       Std error =       0.0713
+
+Test of Ho: s_partner_C_1 and s_partner_C_2 are independent
+ 2-sided exact P =       0.0000
+
+. *This analyses treat var as ordinal     
+. local ocodes "s_focus_ s_task_ s_partner_"
+
+. local row = 1
+
+. foreach c in `ocodes' {
+  2.         polychoric `c'1 `c'2
+  3.         local   rho = `r(rho)'
+  4.         mat     reli[`row',12] = `rho'
+  5.         
+.         local   ++row
+  6.         local   ++row
+  7.         }       
+
+Variables :  s_focus_1 s_focus_2
+Type :       polychoric
+Rho        = .94185223
+S.e.       = .01663332
+Goodness of fit tests:
+Pearson G2 = 24.635984, Prob( >chi2(3)) = .0000184
+LR X2      = 17.744279, Prob( >chi2(3)) = .00049662
+
+Variables :  s_task_1 s_task_2
+Type :       polychoric
+Rho        = .94848415
+S.e.       = .02489647
+Goodness of fit tests:
+Pearson G2 = 10.065722, Prob( >chi2(3)) = .01801566
+LR X2      = 13.905215, Prob( >chi2(3)) = .00303705
+
+Variables :  s_partner_1 s_partner_2
+Type :       polychoric
+Rho        = .98170519
+S.e.       = .00896703
+Goodness of fit tests:
+Pearson G2 = 7.8877393, Prob( >chi2(3)) = .04838967
+LR X2      = 8.9607876, Prob( >chi2(3)) = .0298168
+
+.         
+. matrix rownames reli = `codes'  
+
+. 
+. matlist reli
+
+             |        c1         c2         c3         c4         c5         c6 
+-------------+------------------------------------------------------------------
+   s_focus_S |         .   .9301471   .7711908   .8483457   .5476788          . 
+   s_focus_C |         .   .9650735   .7242968   .8423329   .6108164          . 
+    s_task_S |         .   .9680197   .9401081   .8276957   .7244471          . 
+    s_task_C |         .   .9889706          1   .9684297   .6928839          . 
+ s_partner_S |         .   .9546569   .9606424   .8535251   .7994273          . 
+ s_partner_C |         .   .9852941   .8905727   .9634981   .7795634          . 
+ s_partner_C |         .          .          .          .          .          . 
+ s_partner_C |         .          .          .          .          .          . 
+
+             |        c7         c8         c9        c10        c11        c12 
+-------------+------------------------------------------------------------------
+   s_focus_S |         .   .4735982   .8602941   .5982986   .9154433   .9418522 
+   s_focus_C |         .   .3930999   .9301471   .6595016   .9610815          . 
+    s_task_S |         .   .7170008   .9360394   .7498321   .9633322   .9484842 
+    s_task_C |         .   .4943923   .9779412   .7216442   .9885155          . 
+ s_partner_S |         .     .79548   .9093137    .829122   .9382789   .9817052 
+ s_partner_C |         .   .5847328   .9705882    .810519   .9840567          . 
+ s_partner_C |         .          .          .          .          .          . 
+ s_partner_C |         .          .          .          .          .          . 
+
+. 
+. *********************************************************************
+. // #3 - Calculate reliability stats that require data in long form
+. *********************************************************************
+. use     "- data/cst2-data04-shared_long", clear
+
+. 
+. *Calculate ICCs
+. local codes "s_focus_S s_focus_C s_task_S s_task_C" 
+
+. local codes "`codes' s_partner_S s_partner_C"
+
+. local row = 1
+
+. foreach c in `codes' {          
+  2.         tabstat `c', save
+  3.         mat     temp = r(StatTotal)
+  4.         local   propor = temp[1,1]
+  5.         mat     reli[`row',1] = `propor'
+  6. 
+.         icc     `c' ID ra
+  7.         local   icc = `r(icc_i)'
+  8.         mat     reli[`row',6] = `icc'
+  9.         local   icc = `r(icc_avg)'
+ 10.         mat     reli[`row',7] = `icc'   
+ 11.         local   ++row
+ 12.         }
+
+    variable |      mean
+-------------+----------
+   s_focus_S |  .0919118
+------------------------
+
+Intraclass correlations
+Two-way random-effects model
+Absolute agreement
+
+Random effects: ID               Number of targets =       272
+Random effects: ra               Number of raters  =         2
+
+--------------------------------------------------------------
+             s_focus_S |        ICC       [95% Conf. Interval]
+-----------------------+--------------------------------------
+            Individual |   .4726772       .3749974    .5599799
+               Average |   .6419291       .5454518    .7179322
+--------------------------------------------------------------
+F test that
+  ICC=0.00: F(271.0, 271.0) = 2.79            Prob > F = 0.000
+
+Note: ICCs estimate correlations between individual measurements
+      and between average measurements made on the same target.
+
+    variable |      mean
+-------------+----------
+   s_focus_C |  .0606618
+------------------------
+
+Intraclass correlations
+Two-way random-effects model
+Absolute agreement
+
+Random effects: ID               Number of targets =       272
+Random effects: ra               Number of raters  =         2
+
+--------------------------------------------------------------
+             s_focus_C |        ICC       [95% Conf. Interval]
+-----------------------+--------------------------------------
+            Individual |   .3888427       .2833398    .4850764
+               Average |   .5599521       .4415662    .6532679
+--------------------------------------------------------------
+F test that
+  ICC=0.00: F(271.0, 271.0) = 2.27            Prob > F = 0.000
+
+Note: ICCs estimate correlations between individual measurements
+      and between average measurements made on the same target.
+
+    variable |      mean
+-------------+----------
+    s_task_S |  .0699816
+------------------------
+(1 target omitted from computation because not rated by all raters)
+
+Intraclass correlations
+Two-way random-effects model
+Absolute agreement
+
+Random effects: ID               Number of targets =       271
+Random effects: ra               Number of raters  =         2
+
+--------------------------------------------------------------
+              s_task_S |        ICC       [95% Conf. Interval]
+-----------------------+--------------------------------------
+            Individual |   .7177504       .6546398    .7709177
+               Average |   .8356865       .7912777    .8706421
+--------------------------------------------------------------
+F test that
+  ICC=0.00: F(270.0, 270.0) = 6.07            Prob > F = 0.000
+
+Note: ICCs estimate correlations between individual measurements
+      and between average measurements made on the same target.
+
+    variable |      mean
+-------------+----------
+    s_task_C |  .0184162
+------------------------
+(1 target omitted from computation because not rated by all raters)
+
+Intraclass correlations
+Two-way random-effects model
+Absolute agreement
+
+Random effects: ID               Number of targets =       271
+Random effects: ra               Number of raters  =         2
+
+--------------------------------------------------------------
+              s_task_C |        ICC       [95% Conf. Interval]
+-----------------------+--------------------------------------
+            Individual |   .3937126       .2886996    .4894435
+               Average |   .5649839        .448048    .6572166
+--------------------------------------------------------------
+F test that
+  ICC=0.00: F(270.0, 270.0) = 2.32            Prob > F = 0.000
+
+Note: ICCs estimate correlations between individual measurements
+      and between average measurements made on the same target.
+
+    variable |      mean
+-------------+----------
+ s_partner_S |  .1599265
+------------------------
+
+Intraclass correlations
+Two-way random-effects model
+Absolute agreement
+
+Random effects: ID               Number of targets =       272
+Random effects: ra               Number of raters  =         2
+
+--------------------------------------------------------------
+           s_partner_S |        ICC       [95% Conf. Interval]
+-----------------------+--------------------------------------
+            Individual |   .7954099       .7472743    .8352467
+               Average |   .8860483         .85536    .9102283
+--------------------------------------------------------------
+F test that
+  ICC=0.00: F(271.0, 271.0) = 8.76            Prob > F = 0.000
+
+Note: ICCs estimate correlations between individual measurements
+      and between average measurements made on the same target.
+
+    variable |      mean
+-------------+----------
+ s_partner_C |  .0367647
+------------------------
+
+Intraclass correlations
+Two-way random-effects model
+Absolute agreement
+
+Random effects: ID               Number of targets =       272
+Random effects: ra               Number of raters  =         2
+
+--------------------------------------------------------------
+           s_partner_C |        ICC       [95% Conf. Interval]
+-----------------------+--------------------------------------
+            Individual |   .5856269       .5016766    .6586337
+               Average |   .7386692       .6681553    .7941883
+--------------------------------------------------------------
+F test that
+  ICC=0.00: F(271.0, 271.0) = 3.82            Prob > F = 0.000
+
+Note: ICCs estimate correlations between individual measurements
+      and between average measurements made on the same target.
+
+. 
+.         
+. *********************************************************************
+. // #4 - Final table of all reliability statistics; examine similarities
+. *********************************************************************
+.         
+. matrix colnames reli =  prop agree tet_corr c_kappa k_alpha icc_i icc_avg ///
+>                                                 corr bren_pr fleiss_pi gwet_ac
+>  polych
+
+. 
+. matlist reli, title("Inter-rater reliability statistics") ///
+>                                 twidth(20) format(%9.3f)
+
+Inter-rater reliability statistics
+
+                     |      prop      agree   tet_corr    c_kappa    k_alpha 
+---------------------+-------------------------------------------------------
+           s_focus_S |     0.092      0.930      0.771      0.848      0.548 
+           s_focus_C |     0.061      0.965      0.724      0.842      0.611 
+            s_task_S |     0.070      0.968      0.940      0.828      0.724 
+            s_task_C |     0.018      0.989      1.000      0.968      0.693 
+         s_partner_S |     0.160      0.955      0.961      0.854      0.799 
+         s_partner_C |     0.037      0.985      0.891      0.963      0.780 
+         s_partner_C |         .          .          .          .          . 
+         s_partner_C |         .          .          .          .          . 
+
+                     |     icc_i    icc_avg       corr    bren_pr  fleiss_pi 
+---------------------+-------------------------------------------------------
+           s_focus_S |     0.473      0.642      0.474      0.860      0.598 
+           s_focus_C |     0.389      0.560      0.393      0.930      0.660 
+            s_task_S |     0.718      0.836      0.717      0.936      0.750 
+            s_task_C |     0.394      0.565      0.494      0.978      0.722 
+         s_partner_S |     0.795      0.886      0.795      0.909      0.829 
+         s_partner_C |     0.586      0.739      0.585      0.971      0.811 
+         s_partner_C |         .          .          .          .          . 
+         s_partner_C |         .          .          .          .          . 
+
+                     |   gwet_ac     polych 
+---------------------+----------------------
+           s_focus_S |     0.915      0.942 
+           s_focus_C |     0.961          . 
+            s_task_S |     0.963      0.948 
+            s_task_C |     0.989          . 
+         s_partner_S |     0.938      0.982 
+         s_partner_C |     0.984          . 
+         s_partner_C |         .          . 
+         s_partner_C |         .          . 
+
+.         
+.         
+. *Create variables for statistics to examine similarities
+. svmat   reli, names(col)
+
+. corr    prop agree tet_corr c_kappa k_alpha icc_i icc_avg corr ///
+>                         bren_pr fleiss_pi gwet_ac polych
+(obs=3)
+
+             |     prop    agree tet_corr  c_kappa  k_alpha    icc_i  icc_avg
+-------------+---------------------------------------------------------------
+        prop |   1.0000
+       agree |  -0.0676   1.0000
+    tet_corr |   0.3770   0.8986   1.0000
+     c_kappa |   0.8136  -0.6352  -0.2319   1.0000
+     k_alpha |   0.5496   0.7964   0.9810  -0.0387   1.0000
+       icc_i |   0.4971   0.8321   0.9911  -0.1002   0.9981   1.0000
+     icc_avg |   0.4655   0.8515   0.9952  -0.1359   0.9952   0.9994   1.0000
+        corr |   0.5000   0.8302   0.9906  -0.0968   0.9983   1.0000   0.9992
+     bren_pr |  -0.0676   1.0000   0.8986  -0.6352   0.7964   0.8321   0.8515
+   fleiss_pi |   0.5911   0.7648   0.9699   0.0119   0.9987   0.9937   0.9890
+     gwet_ac |  -0.2597   0.9810   0.7965  -0.7728   0.6640   0.7088   0.7338
+      polych |   0.9242   0.3186   0.7022   0.5298   0.8270   0.7908   0.7683
+
+             |     corr  bren_pr fleiss~i  gwet_ac   polych
+-------------+---------------------------------------------
+        corr |   1.0000
+     bren_pr |   0.8302   1.0000
+   fleiss_pi |   0.9941   0.7648   1.0000
+     gwet_ac |   0.7065   0.9810   0.6254   1.0000
+      polych |   0.7929   0.3186   0.8544   0.1288   1.0000
+
+
+.         
+.                 
+. ****************************************************************
+. // 
+. // 
+. **************************************************************** 
+.                 log close
+      name:  <unnamed>
+       log:  /Users/biancamanago/Dropbox/_AcademicWork/Active/Research/CST_Lab+R
+> esearch/CST_Comparing Status Tasks/- Posted/SM-04 Replication Files/cst2-do01-
+> reliability-shared.log
+  log type:  text
+ closed on:  19 May 2021, 17:44:08
+--------------------------------------------------------------------------------

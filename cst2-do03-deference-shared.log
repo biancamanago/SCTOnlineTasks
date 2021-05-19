@@ -1,0 +1,548 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/biancamanago/Dropbox/_AcademicWork/Active/Research/CST_Lab+R
+> esearch/CST_Comparing Status Tasks/- Posted/SM-04 Replication Files/cst2-do03-
+> deference-shared.log
+  log type:  text
+ opened on:  19 May 2021, 17:53:09
+
+. 
+. **************************************************************** 
+. //  #0
+. //  setup
+. ****************************************************************
+.  
+. // CST2 - Comparing Status Tasks Experiment (Online Prolific Sample) 
+. // Examine deference DV findings
+.  
+.  version 14.1
+
+.  set linesize 80
+
+.  clear all
+
+.  macro drop _all
+
+. 
+.  
+.  local pgm   cst2-do03-deference-shared.do
+
+.  local dte   2020-05-29
+
+.  local who   bianca manago - trent mize  
+
+.  local tag   "`pgm'.do `who' `dte'"
+
+.  
+.  di "`tag'"
+cst2-do03-deference-shared.do.do bianca manago - trent mize 2020-05-29
+
+.  
+.  ****************************************************************
+.  // #1
+.  // Load Data
+.  **************************************************************** 
+.  
+.         use "- data/cst2-data04-shared_wide_nosus", clear
+
+.         
+. ****************************************************************
+. // #1
+. // Examine Ns
+. **************************************************************** 
+.         
+.         fre     task
+
+task -- SC-EST Task
+----------------------------------------------------------------------------
+                               |      Freq.    Percent      Valid       Cum.
+-------------------------------+--------------------------------------------
+Valid   1 Meaning Insight      |         81      33.33      33.33      33.33
+        2 Contrast Sensitivity |         75      30.86      30.86      64.20
+        3 Decision-Making      |         87      35.80      35.80     100.00
+        Total                  |        243     100.00     100.00           
+----------------------------------------------------------------------------
+
+.         
+.         tab             o_man   o_highstat, m
+
+           | Is Other High or Low
+Partner/Ot |        Status?
+  her: Man |     0_Low     1_High |     Total
+-----------+----------------------+----------
+     Woman |        71         75 |       146 
+       Man |        52         45 |        97 
+-----------+----------------------+----------
+     Total |       123        120 |       243 
+
+.         tab             o_man   p_highstat, m   
+
+           |   Is R High or Low
+Partner/Ot |        Status?
+  her: Man |     0_Low     1_High |     Total
+-----------+----------------------+----------
+     Woman |        75         71 |       146 
+       Man |        45         52 |        97 
+-----------+----------------------+----------
+     Total |       120        123 |       243 
+
+.         tab     o_highstat o_educ, m    
+
+ Is Other High or Low |   Other: Education
+              Status? |       GED   Master's |     Total
+----------------------+----------------------+----------
+                0_Low |       123          0 |       123 
+               1_High |         0        120 |       120 
+----------------------+----------------------+----------
+                Total |       123        120 |       243 
+
+.         tab     o_educ task, m
+
+    Other: |           SC-EST Task
+ Education | Meaning I  Contrast   Decision- |     Total
+-----------+---------------------------------+----------
+       GED |        42         30         51 |       123 
+  Master's |        39         45         36 |       120 
+-----------+---------------------------------+----------
+     Total |        81         75         87 |       243 
+
+.         
+. ****************************************************************
+. // #2
+. // Preliminary Analyses / Descriptives
+. **************************************************************** 
+.         
+.         tabstat total_def, by(o_highstat) statistics(mean sd n min max) format
+> (%5.3f)
+
+Summary for variables: total_def
+     by categories of: o_highstat (Is Other High or Low Status?)
+
+      o_highstat |      mean        sd         N       min       max
+-----------------+--------------------------------------------------
+           0_Low |     4.179     3.459   123.000     0.000    15.000
+          1_High |     5.433     3.442   120.000     0.000    15.000
+-----------------+--------------------------------------------------
+           Total |     4.798     3.500   243.000     0.000    15.000
+--------------------------------------------------------------------
+
+.         tabstat total_def, by(task) statistics(mean sd n min max)  format(%5.3
+> f)
+
+Summary for variables: total_def
+     by categories of: task (SC-EST Task)
+
+            task |      mean        sd         N       min       max
+-----------------+--------------------------------------------------
+ Meaning Insight |     5.247     3.846    81.000     0.000    15.000
+Contrast Sensiti |     5.160     3.369    75.000     0.000    15.000
+ Decision-Making |     4.069     3.180    87.000     0.000    13.000
+-----------------+--------------------------------------------------
+           Total |     4.798     3.500   243.000     0.000    15.000
+--------------------------------------------------------------------
+
+. 
+.         * meaning insight       
+.         tabstat total_def if task==1, by(o_highstat) ///
+>                         statistics(mean sd n min max) format(%5.3f)
+
+Summary for variables: total_def
+     by categories of: o_highstat (Is Other High or Low Status?)
+
+      o_highstat |      mean        sd         N       min       max
+-----------------+--------------------------------------------------
+           0_Low |     4.548     3.915    42.000     0.000    15.000
+          1_High |     6.000     3.671    39.000     0.000    14.000
+-----------------+--------------------------------------------------
+           Total |     5.247     3.846    81.000     0.000    15.000
+--------------------------------------------------------------------
+
+.         ttest total_def if task==1, by(o_highstat)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+   0_Low |      42    4.547619    .6040921    3.914964     3.32763    5.767608
+  1_High |      39           6    .5877747    3.670652    4.810112    7.189888
+---------+--------------------------------------------------------------------
+combined |      81    5.246914    .4272836    3.845552    4.396592    6.097235
+---------+--------------------------------------------------------------------
+    diff |           -1.452381    .8448926               -3.134098    .2293358
+------------------------------------------------------------------------------
+    diff = mean(0_Low) - mean(1_High)                             t =  -1.7190
+Ho: diff = 0                                     degrees of freedom =       79
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0448         Pr(|T| > |t|) = 0.0895          Pr(T > t) = 0.9552
+
+.         
+.         * contrast sensitivity
+.         tabstat total_def if task==2, by(o_highstat) ///
+>                         statistics(mean sd n min max) format(%5.3f)
+
+Summary for variables: total_def
+     by categories of: o_highstat (Is Other High or Low Status?)
+
+      o_highstat |      mean        sd         N       min       max
+-----------------+--------------------------------------------------
+           0_Low |     4.867     3.329    30.000     0.000    11.000
+          1_High |     5.356     3.419    45.000     0.000    15.000
+-----------------+--------------------------------------------------
+           Total |     5.160     3.369    75.000     0.000    15.000
+--------------------------------------------------------------------
+
+.         ttest total_def if task==2, by(o_highstat)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+   0_Low |      30    4.866667    .6078667    3.329423     3.62344    6.109894
+  1_High |      45    5.355556    .5096598    3.418902    4.328404    6.382707
+---------+--------------------------------------------------------------------
+combined |      75        5.16    .3890575    3.369337    4.384786    5.935214
+---------+--------------------------------------------------------------------
+    diff |           -.4888889    .7975313               -2.078366    1.100589
+------------------------------------------------------------------------------
+    diff = mean(0_Low) - mean(1_High)                             t =  -0.6130
+Ho: diff = 0                                     degrees of freedom =       73
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2709         Pr(|T| > |t|) = 0.5418          Pr(T > t) = 0.7291
+
+.         
+.         * decision-making
+.         tabstat total_def if task==3, by(o_highstat) ///
+>                 statistics(mean sd n min max) format(%5.3f)
+
+Summary for variables: total_def
+     by categories of: o_highstat (Is Other High or Low Status?)
+
+      o_highstat |      mean        sd         N       min       max
+-----------------+--------------------------------------------------
+           0_Low |     3.471     3.049    51.000     0.000    12.000
+          1_High |     4.917     3.210    36.000     1.000    13.000
+-----------------+--------------------------------------------------
+           Total |     4.069     3.180    87.000     0.000    13.000
+--------------------------------------------------------------------
+
+.         ttest total_def if task==3, by(o_highstat)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+   0_Low |      51    3.470588     .426893    3.048626    2.613148    4.328028
+  1_High |      36    4.916667     .535079    3.210474    3.830399    6.002935
+---------+--------------------------------------------------------------------
+combined |      87    4.068966    .3409161    3.179853    3.391247    4.746684
+---------+--------------------------------------------------------------------
+    diff |           -1.446078    .6783608               -2.794841   -.0973154
+------------------------------------------------------------------------------
+    diff = mean(0_Low) - mean(1_High)                             t =  -2.1317
+Ho: diff = 0                                     degrees of freedom =       85
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0180         Pr(|T| > |t|) = 0.0359          Pr(T > t) = 0.9820
+
+.         
+. 
+. ****************************************************************
+. // #3
+. // Analyses for CST SM Paper
+. **************************************************************** 
+. *Determine if control variables are needed (no)
+. reg     total_def i.task##i.o_educ r_incomeC r_numsurveyC i.r_married ///
+>                 i.r_parent i.r_pol p_ageyrs i.p_man i.p_white
+
+      Source |       SS           df       MS      Number of obs   =       240
+-------------+----------------------------------   F(14, 225)      =      2.09
+       Model |  335.468346        14  23.9620247   Prob > F        =    0.0131
+    Residual |  2575.26499       225  11.4456222   R-squared       =    0.1153
+-------------+----------------------------------   Adj R-squared   =    0.0602
+       Total |  2910.73333       239  12.1788006   Root MSE        =    3.3831
+
+-------------------------------------------------------------------------------
+    total_def |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+         task |
+Contrast S..  |   .3975895   .8449717     0.47   0.638    -1.267481     2.06266
+Decision-M~g  |  -.4937335    .745347    -0.66   0.508    -1.962487      .97502
+              |
+       o_educ |
+    Master's  |   1.644481   .7619413     2.16   0.032     .1430278    3.145935
+              |
+  task#o_educ |
+Contrast S.. #|
+    Master's  |  -.6047228   1.135562    -0.53   0.595    -2.842421    1.632975
+Decision-M~g #|
+    Master's  |  -.3432563   1.087677    -0.32   0.753    -2.486592     1.80008
+              |
+    r_incomeC |   .0063153   .0063018     1.00   0.317    -.0061027    .0187333
+ r_numsurveyC |  -.0031787   .0028803    -1.10   0.271    -.0088545     .002497
+              |
+    r_married |
+     Married  |  -1.264585   .6203787    -2.04   0.043    -2.487081   -.0420898
+              |
+     r_parent |
+    1_Parent  |   1.005483   .6365666     1.58   0.116    -.2489117    2.259878
+              |
+        r_pol |
+  2_Moderate  |  -1.531496   .7090417    -2.16   0.032    -2.928707   -.1342842
+   3_Liberal  |  -.9510065    .587468    -1.62   0.107     -2.10865    .2066365
+              |
+     p_ageyrs |  -.0352572   .0213989    -1.65   0.101    -.0774251    .0069107
+              |
+        p_man |
+       1_man  |  -.6565083   .4775913    -1.37   0.171    -1.597632    .2846157
+              |
+      p_white |
+     1_White  |  -.7047431   .4800224    -1.47   0.143    -1.650658    .2411715
+        _cons |   6.785599   1.099522     6.17   0.000     4.618922    8.952276
+-------------------------------------------------------------------------------
+
+. test    2.r_pol 3.r_pol
+
+ ( 1)  2.r_pol = 0
+ ( 2)  3.r_pol = 0
+
+       F(  2,   225) =    2.41
+            Prob > F =    0.0925
+
+. 
+. *Main model for paper
+. reg     total_def i.task##i.o_educ
+
+      Source |       SS           df       MS      Number of obs   =       243
+-------------+----------------------------------   F(5, 237)       =      2.77
+       Model |   163.48092         5  32.6961839   Prob > F        =    0.0189
+    Residual |  2801.63842       237  11.8212592   R-squared       =    0.0551
+-------------+----------------------------------   Adj R-squared   =    0.0352
+       Total |  2965.11934       242  12.2525593   Root MSE        =    3.4382
+
+-------------------------------------------------------------------------------
+    total_def |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+         task |
+Contrast S..  |   .3190476   .8218884     0.39   0.698    -1.300092    1.938187
+Decision-M~g  |  -1.077031   .7164133    -1.50   0.134    -2.488382    .3343205
+              |
+       o_educ |
+    Master's  |   1.452381   .7645703     1.90   0.059    -.0538409    2.958603
+              |
+  task#o_educ |
+Contrast S.. #|
+    Master's  |  -.9634921   1.114138    -0.86   0.388    -3.158371    1.231387
+Decision-M~g #|
+    Master's  |  -.0063025   1.069918    -0.01   0.995    -2.114068    2.101462
+              |
+        _cons |   4.547619   .5305267     8.57   0.000     3.502469    5.592769
+-------------------------------------------------------------------------------
+
+. mtable, at(task=(1 2 3) o_educ=(0 2)) stat(est se)
+
+Expression: Linear prediction, predict()
+
+           |     task    o_educ        xb        se
+ ----------+---------------------------------------
+         1 |        1         0     4.548     0.531
+         2 |        1         2     6.000     0.551
+         3 |        2         0     4.867     0.628
+         4 |        2         2     5.356     0.513
+         5 |        3         0     3.471     0.481
+         6 |        3         2     4.917     0.573
+
+Specified values where .n indicates no values specified with at()
+
+           |  No at()
+ ----------+---------
+   Current |       .n
+
+. margins, dydx(o_educ) over(task) // Divide p-values by two for one-tailed test
+
+Average marginal effects                        Number of obs     =        243
+Model VCE    : OLS
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.o_educ
+over         : task
+
+-------------------------------------------------------------------------------
+              |            Delta-method
+              |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+0.o_educ      |  (base outcome)
+--------------+----------------------------------------------------------------
+2.o_educ      |
+         task |
+Meaning In..  |   1.452381   .7645703     1.90   0.059    -.0538409    2.958603
+Contrast S..  |   .4888889   .8103929     0.60   0.547    -1.107605    2.085382
+Decision-M~g  |   1.446078   .7484368     1.93   0.055    -.0283601    2.920517
+-------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+. mlincom 3 - 1, stat(est se p)
+
+             |   lincom        se    pvalue 
+-------------+------------------------------
+           1 |    1.133     0.835     0.176 
+
+. 
+. nbreg   total_def i.task##i.o_educ, irr
+
+Fitting Poisson model:
+
+Iteration 0:   log likelihood = -692.22616  
+Iteration 1:   log likelihood = -692.22613  
+
+Fitting constant-only model:
+
+Iteration 0:   log likelihood = -647.81563  
+Iteration 1:   log likelihood =  -628.2733  
+Iteration 2:   log likelihood = -628.26315  
+Iteration 3:   log likelihood = -628.26315  
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -622.27165  
+Iteration 1:   log likelihood = -622.03703  
+Iteration 2:   log likelihood = -622.03674  
+Iteration 3:   log likelihood = -622.03674  
+
+Negative binomial regression                    Number of obs     =        243
+                                                LR chi2(5)        =      12.45
+Dispersion     = mean                           Prob > chi2       =     0.0291
+Log likelihood = -622.03674                     Pseudo R2         =     0.0099
+
+-------------------------------------------------------------------------------
+    total_def |        IRR   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+         task |
+Contrast S..  |   1.070157   .1959249     0.37   0.711     .7474963    1.532096
+Decision-M~g  |    .763166   .1257966    -1.64   0.101      .552473     1.05421
+              |
+       o_educ |
+    Master's  |   1.319372   .2209993     1.65   0.098     .9501409    1.832088
+              |
+  task#o_educ |
+Contrast S.. #|
+    Master's  |   .8340762    .204126    -0.74   0.458     .5162839    1.347482
+Decision-M~g #|
+    Master's  |   1.073743   .2566462     0.30   0.766     .6721192    1.715358
+              |
+        _cons |   4.547619   .5412671    12.73   0.000     3.601408    5.742432
+--------------+----------------------------------------------------------------
+     /lnalpha |  -.9805959   .1580316                     -1.290332   -.6708598
+--------------+----------------------------------------------------------------
+        alpha |   .3750875   .0592757                      .2751794    .5112688
+-------------------------------------------------------------------------------
+Note: Estimates are transformed only in the first equation.
+Note: _cons estimates baseline incidence rate.
+LR test of alpha=0: chibar2(01) = 140.38               Prob >= chibar2 = 0.000
+
+. mtable, at(task=(1 2 3) o_educ=(0 2)) stat(est se)
+
+Expression: Predicted number of total_def, predict()
+
+           |     task    o_educ        mu        se
+ ----------+---------------------------------------
+         1 |        1         0     4.548     0.541
+         2 |        1         2     6.000     0.707
+         3 |        2         0     4.867     0.677
+         4 |        2         2     5.356     0.598
+         5 |        3         0     3.471     0.396
+         6 |        3         2     4.917     0.623
+
+Specified values where .n indicates no values specified with at()
+
+           |  No at()
+ ----------+---------
+   Current |       .n
+
+. margins, dydx(o_educ) over(task) // Divide p-values by two for one-tailed test
+
+Average marginal effects                        Number of obs     =        243
+Model VCE    : OIM
+
+Expression   : Predicted number of events, predict()
+dy/dx w.r.t. : 2.o_educ
+over         : task
+
+-------------------------------------------------------------------------------
+              |            Delta-method
+              |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------+----------------------------------------------------------------
+0.o_educ      |  (base outcome)
+--------------+----------------------------------------------------------------
+2.o_educ      |
+         task |
+Meaning In..  |   1.452381    .890534     1.63   0.103    -.2930337    3.197796
+Contrast S..  |   .4888889    .903566     0.54   0.588    -1.282068    2.259846
+Decision-M~g  |   1.446078   .7382945     1.96   0.050    -.0009522    2.893109
+-------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+.         
+.         // same findings with linear and negative binomial
+. 
+. ****************************************************************
+. // #4
+. // Graphs - Deference
+. **************************************************************** 
+. set     scheme cleanplots       
+
+. graph   set window fontface "Arial"
+
+. 
+. cibar total_def, over1(o_educ) over2(task) ///
+>         graphopts(title("Mean Number of Times Participant Deferred to Partner 
+> (Online Study)") ///
+>         subtitle("By Education Level of Partner, Over Task") legend(position(6
+> ) rows(1)) ///
+>         ytitle("# Times Deferred") xlab(1.5 `""Meaning" "Insight""' ///
+>                 4.2 `""Contrast" "Sensitivty""' 6.8 `""Decision-" "Making""') 
+> ///
+>         title("Online Sample") ylab(1(1)9) ///
+>         name(cst_bargraph_education, replace))  level(68)
+
+.         
+.                 graph export "- figures/cst2-00-def-education-2019-01-11-SE.pd
+> f", replace
+(file /Users/biancamanago/Dropbox/_AcademicWork/Active/Research/CST_Lab+Research
+> /CST_Comparing Status Tasks/- Posted/SM-04 Replication Files/- figures/cst2-00
+> -def-education-2019-01-11-SE.pdf written in PDF format)
+
+. 
+. *Figure for paper with titles removed
+. cibar total_def, over1(o_educ) over2(task) ///
+>         graphopts(legend(position(6) rows(1)) scale(1.2) ///
+>         ytitle("# Times Deferred") xlab(1.5 `""Meaning" "Insight""' ///
+>                 4.2 `""Contrast" "Sensitivty""' 6.8 `""Decision-" "Making""') 
+> ///
+>         title("Online Sample") ylab(1(1)9) ///
+>         name(cst_bargraph_education, replace)) level(68)
+
+.         
+.                 graph export "- figures/cst2-Figure4-def-education.png", repla
+> ce
+(file - figures/cst2-Figure4-def-education.png written in PNG format)
+
+.                 graph save      " - figures/cst2-Figure4", replace            
+>   
+(note: file - figures/cst2-Figure4.gph not found)
+(file - figures/cst2-Figure4.gph saved)
+
+.         
+. ****************************************************************
+. // 
+. // 
+. **************************************************************** 
+.                 log close
+      name:  <unnamed>
+       log:  /Users/biancamanago/Dropbox/_AcademicWork/Active/Research/CST_Lab+R
+> esearch/CST_Comparing Status Tasks/- Posted/SM-04 Replication Files/cst2-do03-
+> deference-shared.log
+  log type:  text
+ closed on:  19 May 2021, 17:53:12
+--------------------------------------------------------------------------------
