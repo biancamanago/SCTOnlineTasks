@@ -10,7 +10,7 @@ _Note, use **cntrl+click** or **cmd+click** to open links in a new window._
 
 The qualtrics file is [this .qsf file](https://github.com/biancamanago/SCTOnlineTasks/files/6511917/CST_Instrument_Posted_2021-02-12.qsf.zip). You can download it to your computer and then follow [these instructions](https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys) to upload it to Qualtrics. 
 
-**IMPORTANT** Do not delete the YES/NO question after the informed consent (QID245). In the Javascript for this question, you will find essential code for the status tasks.
+**IMPORTANT:** Do not delete the YES/NO question after the informed consent (QID245). In the Javascript for this question, you will find essential code for the status tasks.
 
 
 ## Replication files
